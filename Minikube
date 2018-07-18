@@ -1,0 +1,40 @@
+
+Minikube provides a simple way of running Kubernetes on your local machine for free.
+
+>>>Verify that kubectl is configured to communicate with your cluster:
+kubectl cluster-info
+>>>Open the Kubernetes dashboard in a browser:
+minikube dashboard
+>>>First list the currently supported addons:
+minikube addons list
+>>>To enable a plugin:
+minikube addons enable <<plugin name>>
+>>>Stop Minikube:
+minikube stop
+eval $(minikube docker-env -u)
+>>> delete the Minikube VM:
+minikube delete
+>>>Minikube supports running multiple different versions of Kubernetes. You can access a list of all available versions via
+minikube get-k8s-versions
+>>>You can specify the specific version of Kubernetes for Minikube to use by adding the --kubernetes-version string to the minikube
+start command. For example, to run version v1.7.3, you would run the following:
+minikube start --kubernetes-version v1.7.3
+>>>Minikube has a “configurator” feature that allows users to configure the Kubernetes components with arbitrary values. To use this feature,
+you can use the --extra-config flag on the minikube start command.
+Examples
+To change the MaxPods setting to 5 on the Kubelet, pass this flag: --extra-config=kubelet.MaxPods=5.
+
+This feature also supports nested structs. To change the LeaderElection.LeaderElect setting to true on the scheduler, pass this flag: --extra-config=scheduler.LeaderElection.LeaderElect=true.
+
+To set the AuthorizationMode on the apiserver to RBAC, you can use: --extra-config=apiserver.Authorization.Mode=RBAC
+----------------------------------------------------------------------------------------------------------
+Interacting With your Cluster
+
+Kubectl
+The minikube start command creates a “kubectl context” called “minikube”. This context contains the configuration to communicate with your minikube cluster.
+
+Minikube sets this context to default automatically, but if you need to switch back to it in the future, run:
+
+kubectl config use-context minikube,
+
+Or pass the context on each command like this: kubectl get pods --context=minikube
