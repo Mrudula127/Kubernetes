@@ -1,0 +1,6 @@
+Error:Starting minikube on Windows 7 fails to start with - Error getting state for host: machine does not exist
+
+
+Go to C:\Users\\
+Delete the .minikube folder
+Start minikube (minikube.exe start --kubernetes-version="v1.10.0" --vm-driver="virtualbox")
